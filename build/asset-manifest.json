@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/certs/static/js/main.3b425152.js",
+    "main.js": "/certs/static/js/main.b6406c63.js",
     "static/media/gift-certificate.svg": "/certs/static/media/gift-certificate.3ce07618158bc35532da3692202e10df.svg",
     "index.html": "/certs/index.html",
-    "main.3b425152.js.map": "/certs/static/js/main.3b425152.js.map"
+    "main.b6406c63.js.map": "/certs/static/js/main.b6406c63.js.map"
   },
   "entrypoints": [
-    "static/js/main.3b425152.js"
+    "static/js/main.b6406c63.js"
   ]
 }

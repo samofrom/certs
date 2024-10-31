@@ -138,6 +138,7 @@ const CheckoutForm: FC = () => {
                 },
               })}
               label="Email*"
+              type="email"
               error={Boolean(errors.email)}
               helperText={errors.email?.message ?? ' '}
             />
