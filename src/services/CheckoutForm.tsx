@@ -36,7 +36,7 @@ const CheckoutForm: FC = () => {
   const { apiKey } = useParams();
   const navigate = useNavigate();
 
-  const onSubmit: SubmitHandler<CheckoutFormType> = (data) => {
+  const onSubmit: SubmitHandler<CheckoutFormType> = ({ phone, ...data }) => {
     if (apiKey && product) {
       dispatch(
         checkoutUser({
@@ -46,6 +46,7 @@ const CheckoutForm: FC = () => {
           TABLENAME: product.TABLENAME,
           SUMMA: product.SUMMA,
           PRICE: product.PRICE,
+          phone: phone.replaceAll(/[+7]|[()_\s-]/g, ''),
           ...data,
         })
       );
@@ -56,7 +57,13 @@ const CheckoutForm: FC = () => {
   return (
     <Grid container direction="column" spacing={3}>
       <Paper>
-        <Grid container justifyContent="space-between" alignItems="center">
+        <Grid
+          container
+          wrap="nowrap"
+          justifyContent="space-between"
+          alignItems="center"
+          spacing={2}
+        >
           {product ? (
             <Typography>{product.NAME}</Typography>
           ) : (
@@ -86,25 +93,24 @@ const CheckoutForm: FC = () => {
               })}
               autoFocus
               label="ФИО*"
-              placeholder={'asdasd'}
               error={Boolean(errors.clientName)}
               helperText={errors.clientName?.message ?? ' '}
             />
 
             <TextField
-              {...register('phone', {
-                required: 'Поле обязательно',
-                pattern: {
-                  value: /\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/,
-                  message: 'Неверный формат телефона',
-                },
-              })}
               label="Телефон*"
               error={Boolean(errors.phone)}
               helperText={errors.phone?.message ?? ' '}
               slotProps={{
                 input: {
                   inputComponent: PhoneMaskTextField as never,
+                  inputProps: register('phone', {
+                    required: 'Поле обязательно',
+                    pattern: {
+                      value: /\+7 \(\d{3}\) \d{3}-\d{2}-\d{2}/,
+                      message: 'Неверный формат телефона',
+                    },
+                  }),
                 },
               }}
             />

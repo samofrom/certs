@@ -8,9 +8,9 @@ const Page: FC = () => {
       component="section"
       container
       direction="column"
-      gap={1}
+      spacing={6}
       sx={{
-        height: '100dvh',
+        minHeight: '100dvh',
         padding: 6,
       }}
     >
@@ -30,7 +30,7 @@ const Page: FC = () => {
             <Typography variant="monospace" textAlign="center">
               Developed with ❤️ in 2024 by
             </Typography>
-            <Link href="#" target="_blank">
+            <Link href="https://github.com/samofrom/" target="_blank">
               <Typography variant="monospace">@samofrom</Typography>
             </Link>
           </Grid>

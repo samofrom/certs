@@ -5,6 +5,8 @@ import Page from './ui/Page';
 import CertificateList from './services/CertificateList';
 import CheckoutForm from './services/CheckoutForm';
 import Payment from './services/Payment';
+import PageNotFound from './ui/PageNotFound';
+import Main from './ui/Main';
 
 export const router = createBrowserRouter(
   [
@@ -14,7 +16,7 @@ export const router = createBrowserRouter(
       children: [
         {
           index: true,
-          element: 'Not found',
+          element: <Main />,
         },
         {
           path: '/:apiKey',
@@ -27,6 +29,10 @@ export const router = createBrowserRouter(
         {
           path: '/:apiKey/payment',
           element: <Payment />,
+        },
+        {
+          path: '*',
+          element: <PageNotFound />,
         },
       ],
     },

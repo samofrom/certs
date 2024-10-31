@@ -1,23 +1,18 @@
-import { Box } from '@mui/material';
-import React, { FC, useEffect } from 'react';
+import { CircularProgress, Grid2 as Grid, Typography } from '@mui/material';
+import React, { FC } from 'react';
 import { useAppSelector } from '../redux/hooks';
-import { useNavigate } from 'react-router-dom';
 
 const Payment: FC = () => {
   const { certNumber, status } = useAppSelector((state) => state.certificates);
 
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    if (status === 'idle' && !certNumber) navigate('..', { relative: 'path' });
-  }, []);
-
   return (
-    <Box>
-      {status === 'pending'
-        ? 'Загрузка...'
-        : `Оплата сертификата ${certNumber}...`}
-    </Box>
+    <Grid container justifyContent="center">
+      {status === 'pending' ? (
+        <CircularProgress size={120} />
+      ) : (
+        <Typography>Оплата сертификата {certNumber}...</Typography>
+      )}
+    </Grid>
   );
 };
 

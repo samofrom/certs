@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect } from 'react';
-import { CircularProgress, Grid2 as Grid, Skeleton } from '@mui/material';
+import { CircularProgress, Grid2 as Grid, Typography } from '@mui/material';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { fetchCertificates, selectProduct } from '../redux/slices/certificates';
 import Certificate from '../ui/Certificate';
@@ -25,18 +25,29 @@ const CertificateList: FC = () => {
     [dispatch, navigate, selectProduct]
   );
 
-  if (status === 'failed') return <div>Wrong api key</div>;
+  if (status === 'failed')
+    return (
+      <Typography variant="h4" align="center">
+        Wrong API key
+      </Typography>
+    );
 
-  return status !== 'succeeded' ? (
-    <Grid container justifyContent="center" alignItems="center">
-      <Grid>
-        <CircularProgress size={120} />
-      </Grid>
+  return status === 'pending' ? (
+    <Grid container justifyContent="center">
+      <CircularProgress size={120} />
     </Grid>
   ) : (
     <Grid container spacing={2}>
       {list.map(({ ID, ...certificate }) => (
-        <Grid key={ID} component="article" size={3}>
+        <Grid
+          key={ID}
+          component="article"
+          size={{
+            md: 3,
+            sm: 6,
+            xs: 12,
+          }}
+        >
           <Certificate {...certificate} CTA={() => handleButtonClick(ID)} />
         </Grid>
       ))}
